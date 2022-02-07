@@ -13,9 +13,13 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
       -
-        name: setup
+        name: setup & serve
         run: |
           sudo apt install nodejs npm
           npm i -D
           npx playwright install 
-          npm start && npm run e2e   
+          npm start & npx wait-on http://localhost:3000
+      -
+        name: run playwright
+        run: |
+          npm run e2e   

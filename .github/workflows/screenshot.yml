@@ -1,0 +1,21 @@
+---
+name: Screenshot
+
+on: push
+
+jobs:
+  screenshot:
+    name: Screenshot
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: setup
+        run: |
+          sudo apt install nodejs npm
+          npm i -D
+          npx playwright install 
+          npm start && npm run e2e   

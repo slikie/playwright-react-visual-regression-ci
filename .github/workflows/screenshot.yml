@@ -22,4 +22,16 @@ jobs:
       -
         name: run playwright
         run: |
-          npm run e2e   
+          npm run e2e
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-screenshot-artifact
+          path: ${{ github.workspace }}/public/screenshot.png
+
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v8
+        with:
+          author_name: ci bot
+          author_email: ci@example.com
+          message: '[skip ci]update screenshots'
+          add: '*/screenshot.png'
